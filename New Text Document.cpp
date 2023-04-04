@@ -1,1 +1,5 @@
 #include<iostream>
+
+class Genome{
+
+};
