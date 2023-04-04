@@ -20,6 +20,8 @@ private:
         if (a == 'G')
             return 'C';
     }
+    //Calculate Completed for every single Noclotid in RNA
+    // and then return it as a string
     string create_second_DNA_from_RNA(string input_RNA){
         string make_DNA=input_RNA;
         for (int i = 0; i < input_RNA.length(); i++)
@@ -27,6 +29,15 @@ private:
             make_DNA[i] = Calculate_completed(input_RNA[i]);
         }
         return make_DNA;
+    }
+    //getting a string and returning reverse order of it
+    string Create_reverse(string s1){
+        string s2 = s1;
+        int n = s1.length();
+        for (int i =0 ; i < n ; i++){
+            s2[n-i-1]=s1[i];
+        }
+        return s2;
     }
 public:
     Genome( string input_RNA){
@@ -89,7 +100,7 @@ public:
     {
         cout<<"creating big mutation\n";
         int i = RNA.find(s1);
-        if (i == RNA[RNA.length() - 1])
+        if (i == -1)
         {
             cout << "we dont have this substring in RNA" << endl
                  << "Please try again" << endl;
@@ -101,13 +112,30 @@ public:
         DNA[0] = RNA;
         DNA[1] = create_second_DNA_from_RNA(DNA[0]);
     }
+    void create_reverse_mutation(string s1){
+        cout<<"creating reverse mutation\n";
+        int i = RNA.find(s1);
+        if (i == -1)
+        {
+            cout << "we dont have this substring in RNA" << endl
+                 << "Please try again" << endl;
+        }
+        else{
+            string s2 = Create_reverse(s1);
+            for (int j = i; j < s2.length() + i; j++)
+                RNA[j] = s2[j-i];
+    }
+        DNA[0] = RNA;
+        DNA[1] = create_second_DNA_from_RNA(DNA[0]);
+    }
 };
 
 
 int main(){
-    // Genome my_obj("ACGTACGT");
-    // my_obj.Print_DNA();
-    // my_obj.Print_RNA();
+    Genome my_obj("ACGTACGT");
+    my_obj.create_reverse_mutation("ACG");
+    my_obj.Print_DNA();
+    my_obj.Print_RNA();
     // my_obj.Create_DNA("CGGGCCCGGG");
     // my_obj.Create_big_mutation("ACG","CGA");
     // my_obj.Print_DNA();
