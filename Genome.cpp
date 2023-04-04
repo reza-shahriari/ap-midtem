@@ -40,11 +40,11 @@ private:
         return s2;
     }
 public:
-    Genome( string input_RNA){
+    Genome( string input_RNA,string DNA1,string DNA2){
         RNA = input_RNA;
         string help_split;
-        DNA[0] = RNA;
-        DNA[1] = create_second_DNA_from_RNA(RNA);
+        DNA[0] = DNA1;
+        DNA[1] = DNA2;
     }
     void Print_RNA()const {cout<<"RNA is:\n"<<RNA<<endl;}
     void Print_DNA()const {cout<<"DNA is:\n"<<DNA[0]<<endl<<DNA[1]<<endl;}
@@ -57,12 +57,12 @@ public:
         return DNA[0] + DNA[1];
     }
     // creating DNA form RNA
-    void Create_DNA(string input_RNA)
+    void Create_DNA()
     {
-        cout<<"creating DNA from inputed RNA\n";
+        cout<<"creating DNA from RNA\n";
         string DNA_maker[2];
-        DNA_maker[0] = input_RNA;
-        DNA_maker[1] = create_second_DNA_from_RNA(input_RNA);
+        DNA_maker[0] = RNA;
+        DNA_maker[1] = create_second_DNA_from_RNA(RNA);
         cout << "created DNA is:\n"
              << DNA_maker[0] << endl
              << DNA_maker[1] << endl;
@@ -101,16 +101,17 @@ public:
         cout<<"creating big mutation\n";
         int i = RNA.find(s1);
         if (i == -1)
-        {
-            cout << "we dont have this substring in RNA" << endl
-                 << "Please try again" << endl;
-        }
+            cout << "the string not found in RNA\n"
+                 << "Please try again\n";
         else{
             for (int j =i; j < i + s2.length(); j++)
                 RNA[j] = s2[j-i];            
         }
-        DNA[0] = RNA;
-        DNA[1] = create_second_DNA_from_RNA(DNA[0]);
+        i = DNA[0].find(s1);
+        if (i == -1)
+            cout << "the string not found in DNA\n"
+                 << "Please try again\n";   
+
     }
     void create_reverse_mutation(string s1){
         cout<<"creating reverse mutation\n";
@@ -130,18 +131,7 @@ public:
     }
 };
 
-
 int main(){
-    Genome my_obj("ACGTACGT");
-    my_obj.create_reverse_mutation("ACG");
-    my_obj.Print_DNA();
-    my_obj.Print_RNA();
-    // my_obj.Create_DNA("CGGGCCCGGG");
-    // my_obj.Create_big_mutation("ACG","CGA");
-    // my_obj.Print_DNA();
-    // my_obj.Print_RNA();
-    // my_obj.Create_small_mutation('A','T',1);
-    // my_obj.Print_DNA();
-    // my_obj.Print_RNA();
+
 
 }
