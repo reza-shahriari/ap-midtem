@@ -130,8 +130,3 @@ public:
         DNA[1] = create_second_DNA_from_RNA(DNA[0]);
     }
 };
-
-int main(){
-
-
-}
