@@ -55,28 +55,43 @@ void Create_new_Genome()
 }
 
 int main()
-{ 
+{
     bool gameOn = true;
     cout << "wellcome to the application\n";
-    int choise;
-   while (gameOn!=false)
-   { 
-    cout<< "--------------------------------\n";
-    cout << "1-Create a new Genome\n";
-    cout << "2-Work with a Genome\n";
-    cout << "3-Create a new Cell\n";
-    cout << "4-Work with a Cell\n";
-    cout << "5-Craete a new Animal\n";
-    cout << "6-Work with a Animal\n";
-    cout << "--------------------------------\n";
-    cout << "Input one number between 1 and 6...\n";
-    choise = correct_number_cin(1, 6);
-    if (choise == 1)
-        Create_new_Genome();
-    else 
-
-
-
-
-   }
+    int choice;
+    while (gameOn != false)
+    {
+        cout << "--------------------------------\n";
+        cout << "1-Create a new Genome\n";
+        cout << "2-Work with a Genome\n";
+        cout << "3-Create a new Cell\n";
+        cout << "4-Work with a Cell\n";
+        cout << "5-Craete a new Animal\n";
+        cout << "6-Work with a Animal\n";
+        cout << "--------------------------------\n";
+        cout << "Input one number between 1 and 6...\n";
+        choice = correct_number_cin(1, 6);
+        switch (choice)
+        {
+        case 1:
+            Create_new_Genome();
+            break;
+        case 2:
+            
+            break;
+        case 3:
+            cout << "Ahahah, you really think I will help you?\n";
+            // rest of code here
+            break;
+        case 4:
+            cout << "End of Program.\n";
+            gameOn = false;
+            break;
+        default:
+            cout << "Not a Valid Choice. \n";
+            cout << "Choose again.\n";
+            cin >> choice;
+            break;
+        }
+    }
 }
