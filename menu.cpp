@@ -49,6 +49,7 @@ int correct_number_cin(int a, int b)
     }
 }
 
+// functions writed in Cell are now acce
 void Work_with_cell()
 {
     if (All_Cells.size() == 0)
@@ -91,53 +92,87 @@ void Work_with_cell()
     {
         cout << "Checking cromozoms for killing...\n";
         cout << "--------------------------------\n";
-        cout << "Before delting we have this cromozoms:\n";
+        cout << "Before deletation we have this cromozoms:\n";
         for (int i = 0; i < All_Cells[iter].cromozom_vector.size(); i++)
         {
             cout << i + 1 << ".{ " << All_Cells[i].cromozom_vector[i].DNA[0] << endl
                  << All_Cells[i].cromozom_vector[i].DNA[1] << "}\n";
         }
+
         All_Cells[iter].Killing_cell();
+
+        cout << "Done!\nCromozoms after deletation...:\n";
+        for (int i = 0; i < All_Cells[iter].cromozom_vector.size(); i++)
+        {
+            cout << i + 1 << ".{ " << All_Cells[i].cromozom_vector[i].DNA[0] << endl
+                 << All_Cells[i].cromozom_vector[i].DNA[1] << "}\n";
+        }
     }
     case 3:
+    {
+        cout << "Which two things do you want to exchange?"
+             << "(First, what is now in RNA\n"
+             << "Second, what is to be replaced)";
+        string A = correct_RNA_cin();
+        string C = correct_RNA_cin();
+        cout << "How many times should this change be done?\n";
+        int n;
+        cin >> n;
+        cout << "In which chromosome?(select one)\n";
+        for (int i = 0; i < All_Cells[iter].cromozom_vector.size(); i++)
+        {
+            cout << i + 1 << ".{ " << All_Cells[iter].cromozom_vector[i].DNA[0] << endl
+                 << All_Cells[iter].cromozom_vector[i].DNA[1] << "}\n";
+        }
+        int m = correct_number_cin(1, All_Cells[iter].cromozom_vector.size());
+
+        All_Cells[iter].Create_small_mutation(A[0], C[0], n, m - 1);
+        cout << "Done!\n";
+        cout << "{ " << All_Cells[iter].cromozom_vector[m].DNA[0] << endl
+             << All_Cells[iter].cromozom_vector[m].DNA[1] << "}\n";
+    }
+    case 4:
     {
         cout << "First enter the substring to be changed"
              << "Then enter the new substring ";
         string s1 = correct_RNA_cin();
         string s2 = correct_RNA_cin();
-        All_Genomes[iter].Create_big_mutation(s1, s2);
-        cout << "Done!\n"
-             << "new RNA is:";
-        All_Genomes[iter].Print_RNA();
-        cout << "\nnew DNA is:";
-        All_Genomes[iter].Print_DNA();
-        break;
-    }
-    case 4:
-    {
-        cout << "enter substring you want to reverse\n";
-        string s1 = correct_RNA_cin();
-        All_Genomes[iter].create_reverse_mutation(s1);
-        cout << "Done!\n"
-             << "new RNA is:";
-        All_Genomes[iter].Print_RNA();
-        cout << "\nnew DNA is:";
-        All_Genomes[iter].Print_DNA();
+        cout << "Enter the two chromosomes you want to swap\n";
+        for (int i = 0; i < All_Cells[iter].cromozom_vector.size(); i++)
+        {
+            cout << i + 1 << ".{ " << All_Cells[iter].cromozom_vector[i].DNA[0] << endl
+                 << All_Cells[iter].cromozom_vector[i].DNA[1] << "}\n";
+        }
+        int n = correct_number_cin(1, All_Cells[iter].cromozom_vector.size());
+        int m = correct_number_cin(1, All_Cells[iter].cromozom_vector.size());
+        All_Cells[iter].Create_big_mutation(s1, n - 1, s2, m - 1);
         break;
     }
     case 5:
     {
-        cout << "Enter the RNA you want crete DNA from:\n";
+        cout << "enter substring you want to reverse\n";
         string s1 = correct_RNA_cin();
-        All_Genomes[iter].Create_DNA(s1);
-        cout << "Done!\n"
-             << "new RNA is:";
-        All_Genomes[iter].Print_RNA();
-        cout << "\nnew DNA is:";
-        All_Genomes[iter].Print_DNA();
-        break;
+        cout << "In which chromosome?(select one)\n";
+        for (int i = 0; i < All_Cells[iter].cromozom_vector.size(); i++)
+        {
+            cout << i + 1 << ".{ " << All_Cells[iter].cromozom_vector[i].DNA[0] << endl
+                 << All_Cells[iter].cromozom_vector[i].DNA[1] << "}\n";
+        }
+        int n = correct_number_cin(1, All_Cells[iter].cromozom_vector.size());
+        All_Cells[iter].Create_reverse_mutation(s1, n - 1);
     }
     case 6:
+    {
+        for (int i = 0; i < All_Cells[iter].cromozom_vector.size(); i++)
+        {
+            cout << i + 1 << ".{ " << All_Cells[iter].cromozom_vector[i].DNA[0] << endl
+                 << All_Cells[iter].cromozom_vector[i].DNA[1] << "}\n";
+        }
+        int m = correct_number_cin(1, All_Cells[iter].cromozom_vector.size());
+        cout << "Finding all complete palindrome...\n";
+        All_Cells[iter].Find_all_complete_palindrome(m - 1);
+    }
+    case 7:
     {
         cout << "returning to main menu..." << endl;
         break;
@@ -180,8 +215,8 @@ void Work_with_genome()
     cout << "What do you want to do with this Genome?\n"
          << "1. Print DNA\n"
          << "2. Create small mutation\n"
-         << "3. Create_big_mutation\n"
-         << "4. Create_reverse_mutation\n"
+         << "3. Create big mutation\n"
+         << "4. Create reverse mutation\n"
          << "5. Create a DNA from a RNA\n"
          << "6. Cancel";
     int c = correct_number_cin(1, 6);
