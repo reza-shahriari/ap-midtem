@@ -126,7 +126,7 @@ public:
     }
 };
 
-int main()
-{
-    Genome gen("AAA", "TTT", "GGG");
-}
+// int main()
+// {
+//     Genome gen("AAA", "TTT", "GGG");
+// }

@@ -22,7 +22,7 @@ private:
     }
     //Calculate Completed for every single Noclotid in RNA
     // and then return it as a string
-    string create_second_DNA_from_RNA(string input_RNA){
+    string Create_second_DNA_from_RNA(string input_RNA){
         string make_DNA=input_RNA;
         for (int i = 0; i < input_RNA.length(); i++)
         {
@@ -62,7 +62,7 @@ public:
         cout<<"creating DNA from RNA\n";
         string DNA_maker[2];
         DNA_maker[0] = RNA;
-        DNA_maker[1] = create_second_DNA_from_RNA(RNA);
+        DNA_maker[1] = Create_second_DNA_from_RNA(RNA);
         cout << "created DNA is:\n"
              << DNA_maker[0] << endl
              << DNA_maker[1] << endl;
@@ -127,7 +127,7 @@ public:
                 RNA[j] = s2[j-i];
     }
         DNA[0] = RNA;
-        DNA[1] = create_second_DNA_from_RNA(DNA[0]);
+        DNA[1] = Create_second_DNA_from_RNA(DNA[0]);
     }
 };
 
