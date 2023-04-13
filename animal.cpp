@@ -8,8 +8,21 @@ using namespace std;
 
 class Animal : public Cell
 {
+private:
+    int my_ceil(double f)
+    {
+        if (f <= int(f))
+            return f;
+        else
+            return int(f) + 1;
+    }
+
 public:
     vector<Cell> cells_vector;
+    vector<*Animal> childs_vector;
+    Animal() : Cell()
+    {
+    }
     // finding distance between two strings using DP
     int Get_distance(string s1, string s2)
     {
@@ -48,6 +61,8 @@ public:
         }
         return 1.0;
     }
+    // finding Similarity between two cells
+    // comparing all cromozoms in cells
     double Similarity_cells(Animal a)
     {
         int n = a.cells_vector.size();
@@ -75,6 +90,7 @@ public:
         }
         return (cal / N);
     }
+    //return true if Animals are enough similar 
     bool operator==(const Animal a)
     {
         if (cells_vector.size() != a.cells_vector.size())
@@ -82,6 +98,27 @@ public:
         if (Similarity_cells(a) < 0.70)
             return false;
         return true;
+    }
+    //new child object from what we already have
+    void make_Asexual_reproduction()
+    {
+        Animal *new_child = new Animal;
+        for (int i = 0; i < this->cells_vector.size(); i++)
+        {
+            new_child->cells_vector.push_back(this->cells_vector[i]);
+            new_child->cells_vector.push_back(this->cells_vector[i]);
+        }
+        double n = new_child->cells_vector.size();
+        int m = my_ceil(n / 100.0 * 72.0);
+        for (int i = m; i < n; i++)
+        {
+            for (int j = 0; j < new_child->cells_vector[i].cromozom_vector.size(); j++)
+            {
+                new_child->cells_vector[i].cromozom_vector[j].DNA[0] = Create_random_cromozom(new_child->cells_vector[i].cromozom_vector[j].DNA[0].size());
+                new_child->cells_vector[i].cromozom_vector[j].DNA[1] = create_second_DNA_from_first_DNA(new_child->cells_vector[i].cromozom_vector[j].DNA[0]);
+            }
+        }
+        this->childs_vector.push_back(new_child);
     }
 };
 

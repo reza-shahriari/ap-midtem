@@ -9,11 +9,11 @@ class Cell : public Genome
 public:
     vector<Genome> cromozom_vector;
     int cunst;
-    Cell(string input_RNA, string DNA1, string DNA2) : Genome(input_RNA, DNA1, DNA2)
+    Cell():Genome(){
+        
+    }
+    Cell(string DNA1, string DNA2) : Genome()
     {
-        RNA = "";
-        DNA[0] = "";
-        DNA[1] = "";
         Genome gen("", DNA1, DNA2);
         cromozom_vector.push_back(gen);
     }

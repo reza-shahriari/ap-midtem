@@ -2,7 +2,6 @@
 #include <string>
 using namespace std;
 
-
 class Genome
 {
 private:
@@ -20,34 +19,48 @@ private:
         if (a == 'G')
             return 'C';
     }
-    //Calculate Completed for every single Noclotid in RNA
-    // and then return it as a string
-    string Create_second_DNA_from_RNA(string input_RNA){
-        string make_DNA=input_RNA;
+    // Calculate Completed for every single Noclotid in RNA
+    //  and then return it as a string
+    string Create_second_DNA_from_RNA(string input_RNA)
+    {
+        string make_DNA = input_RNA;
         for (int i = 0; i < input_RNA.length(); i++)
         {
             make_DNA[i] = Calculate_completed(input_RNA[i]);
         }
         return make_DNA;
     }
-    //getting a string and returning reverse order of it
-    string Create_reverse(string s1){
+    // getting a string and returning reverse order of it
+    string Create_reverse(string s1)
+    {
         string s2 = s1;
         int n = s1.length();
-        for (int i =0 ; i < n ; i++){
-            s2[n-i-1]=s1[i];
+        for (int i = 0; i < n; i++)
+        {
+            s2[n - i - 1] = s1[i];
         }
         return s2;
     }
+
 public:
-    Genome( string input_RNA,string DNA1,string DNA2){
+    Genome()
+    {
+        RNA = "";
+        DNA[0] = "";
+        DNA[1] = "";
+    }
+    Genome(string input_RNA, string DNA1, string DNA2)
+    {
         RNA = input_RNA;
         string help_split;
         DNA[0] = DNA1;
         DNA[1] = DNA2;
     }
-    void Print_RNA()const {cout<<"RNA is:\n"<<RNA<<endl;}
-    void Print_DNA()const {cout<<"DNA is:\n"<<DNA[0]<<endl<<DNA[1]<<endl;}
+    void Print_RNA() const { cout << "RNA is:\n"
+                                  << RNA << endl; }
+    void Print_DNA() const { cout << "DNA is:\n"
+                                  << DNA[0] << endl
+                                  << DNA[1] << endl; }
     // return RNA
     string Get_RNA() const { return RNA; }
     // return DNA both in a single string
@@ -59,7 +72,7 @@ public:
     // creating DNA form RNA
     void Create_DNA()
     {
-        cout<<"creating DNA from RNA\n";
+        cout << "creating DNA from RNA\n";
         string DNA_maker[2];
         DNA_maker[0] = RNA;
         DNA_maker[1] = Create_second_DNA_from_RNA(RNA);
@@ -70,7 +83,7 @@ public:
     // creatign small mutation in RNA and DNA
     void Create_small_mutation(char A, char C, int n)
     {
-        cout<<"creating small mutation\n";
+        cout << "creating small mutation\n";
         int check = n;
         for (int i = 0; i < RNA.length(); i++)
         {
@@ -95,43 +108,44 @@ public:
             }
         }
     }
-    //creating big mutaion in RNA and DNA
+    // creating big mutaion in RNA and DNA
     void Create_big_mutation(string s1, string s2)
     {
-        cout<<"creating big mutation\n";
+        cout << "creating big mutation\n";
         int i = RNA.find(s1);
         if (i == -1)
             cout << "the string not found in RNA\n"
                  << "Please try again\n";
-        else{
-            for (int j =i; j < i + s2.length(); j++)
-                RNA[j] = s2[j-i];            
+        else
+        {
+            for (int j = i; j < i + s2.length(); j++)
+                RNA[j] = s2[j - i];
         }
         i = DNA[0].find(s1);
         if (i == -1)
             cout << "the string not found in DNA\n"
-                 << "Please try again\n";   
-
+                 << "Please try again\n";
     }
-    void Create_reverse_mutation(string s1){
-        cout<<"creating reverse mutation\n";
+    void Create_reverse_mutation(string s1)
+    {
+        cout << "creating reverse mutation\n";
         int i = RNA.find(s1);
         if (i == -1)
         {
             cout << "we dont have this substring in RNA" << endl
                  << "Please try again" << endl;
         }
-        else{
+        else
+        {
             string s2 = Create_reverse(s1);
             for (int j = i; j < s2.length() + i; j++)
-                RNA[j] = s2[j-i];
-    }
+                RNA[j] = s2[j - i];
+        }
         DNA[0] = RNA;
         DNA[1] = Create_second_DNA_from_RNA(DNA[0]);
     }
 };
 
-int main(){
-
-
+int main()
+{
 }
