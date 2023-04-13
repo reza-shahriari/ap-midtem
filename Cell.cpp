@@ -53,6 +53,22 @@ public:
             cromozom_vector[m].DNA[1][i + iter2] = temp1[i];
         }
     }
+    void Create_small_mutation(char A, char C, int n, int m)
+    {
+        int f = n;
+        for (int i = 0; i < cromozom_vector[m].DNA[0].size(); i++)
+        {
+            if (cromozom_vector[m].DNA[0][i] == A)
+            {
+                cromozom_vector[m].DNA[0][i] = C;
+                cromozom_vector[m].DNA[1][i] = Calculate_completed(C);
+                f--;
+            }
+            if (f == 0)
+                break;
+        }
+    }
+    
 };
 
 int main()
