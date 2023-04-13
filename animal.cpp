@@ -9,6 +9,30 @@ using namespace std;
 class Animal : public Cell
 {
 private:
+    Animal *Radomize_with_inputed_similarity(Animal *parent, double Max_len, double Sim_per)
+    {
+        vector<Cell> tmp;
+        Animal *new_child = new Animal;
+        int m = my_ceil(Max_len / 100.0 * Sim_per);
+        for (int i = 0; i < m; i++)
+        {
+            new_child->cells_vector.push_back(parent->cells_vector[i]);
+            tmp.push_back(parent->cells_vector[i]);
+        }
+        for (int i = m; i < parent->cells_vector.size(); i++)
+        {
+            tmp.push_back(parent->cells_vector[i]);
+            tmp.push_back(parent->cells_vector[i]);
+        }
+        int F = tmp.size();
+        for (int i = m; i < Max_len; i++)
+        {
+            int random = rand() % F;
+            new_child->cells_vector.push_back(tmp[random]);
+            tmp.erase(tmp.begin() + random);
+        }
+        return new_child;
+    }
     int my_ceil(double f)
     {
         if (f <= int(f))
@@ -19,7 +43,8 @@ private:
 
 public:
     vector<Cell> cells_vector;
-    vector<*Animal> childs_vector;
+
+    vector<Animal *> childs_vector;
     Animal() : Cell()
     {
     }
@@ -90,7 +115,7 @@ public:
         }
         return (cal / N);
     }
-    //return true if Animals are enough similar 
+    // return true if Animals are enough similar
     bool operator==(const Animal a)
     {
         if (cells_vector.size() != a.cells_vector.size())
@@ -99,26 +124,45 @@ public:
             return false;
         return true;
     }
-    //new child object from what we already have
-    void make_Asexual_reproduction()
+    // new child object from what we already have
+    Animal *Make_asexual_reproduction(bool add)
     {
         Animal *new_child = new Animal;
-        for (int i = 0; i < this->cells_vector.size(); i++)
+        new_child = Radomize_with_inputed_similarity(this, this->cells_vector.size(), 72);
+        if (add)
+            this->childs_vector.push_back(new_child);
+        return new_child;
+    }
+    Animal *operator+(Animal M)
+    {
+        if (M.cells_vector.size() != this->cells_vector.size())
         {
-            new_child->cells_vector.push_back(this->cells_vector[i]);
-            new_child->cells_vector.push_back(this->cells_vector[i]);
+            cout << "diffrent cromozoms... cant make sexual reproduction\n";
+            return;
         }
-        double n = new_child->cells_vector.size();
-        int m = my_ceil(n / 100.0 * 72.0);
-        for (int i = m; i < n; i++)
+        Animal *tmp1 = this->Make_asexual_reproduction(false);
+        Animal *tmp2 = M.Make_asexual_reproduction(false);
+        if (tmp1->cells_vector.size() % 2 != 0)
         {
-            for (int j = 0; j < new_child->cells_vector[i].cromozom_vector.size(); j++)
-            {
-                new_child->cells_vector[i].cromozom_vector[j].DNA[0] = Create_random_cromozom(new_child->cells_vector[i].cromozom_vector[j].DNA[0].size());
-                new_child->cells_vector[i].cromozom_vector[j].DNA[1] = create_second_DNA_from_first_DNA(new_child->cells_vector[i].cromozom_vector[j].DNA[0]);
-            }
+            cout << "cromozoms number should be ODD\n";
+            return;
         }
-        this->childs_vector.push_back(new_child);
+        tmp1 = tmp1->Radomize_with_inputed_similarity(tmp1, tmp1->cells_vector.size() / 2, 72);
+        if (tmp2->cells_vector.size() % 2 != 0)
+        {
+            cout << "cromozoms number should be ODD\n";
+            return;
+        }
+        tmp2 = tmp2->Radomize_with_inputed_similarity(tmp1, tmp1->cells_vector.size() / 2, 72);
+        Animal *tmp3 = new Animal;
+        for (int i = 0; i < tmp1->cells_vector.size(); i++)
+        {
+            tmp3->cells_vector.push_back(tmp1->cells_vector[i]);
+        }
+        for (int i = 0; i < tmp2->cells_vector.size(); i++)
+        {
+            tmp3->cells_vector.push_back(tmp2->cells_vector[i]);
+        }
     }
 };
 
