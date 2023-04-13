@@ -1,5 +1,13 @@
 #include <iostream>
+#include <string>
+#include <vector>
 #include "Genome.h"
+#include "Cell.h"
+#include "Animal.h"
+
+vector<Animal> All_Animals;
+vector<Genome> All_Genomes;
+vector<Cell> All_Cells;
 
 using namespace std;
 // checking input RNA if it is correct or not
@@ -41,6 +49,65 @@ int correct_number_cin(int a, int b)
     }
 }
 
+//
+void Work_with_genome()
+{
+    cout << "Selcet one Genome\n";
+    for (int i = 0; i < All_Genomes.size(); i++)
+    {
+        cout << i + 1 << ". " << All_Genomes[i].RNA << endl;
+    }
+    int iter = correct_number_cin(1, All_Genomes.size()) - 1;
+    cout << "What do you want to do with this Genome?\n"
+         << "1. Print DNA\n"
+         << "2. Create small mutation\n"
+         << "3. Create_big_mutation\n"
+         << "4. Create_reverse_mutation\n"
+         << "5. Create a DNA from a RNA\n"
+         << "6. Cancel";
+    int c = correct_number_cin(1, 6);
+    switch (c)
+    {
+    case 1:
+        All_Genomes[iter].Print_DNA();
+        break;
+    case 2:
+        cout << "Which two things do you want to exchange?"
+             << "(First, what is now in RNA\n"
+             << "Second, what is to be replaced)";
+        string A = correct_RNA_cin();
+        string C = correct_RNA_cin();
+        cout << "How many times should this change be done?\n";
+        int n;
+        cin >> n;
+        All_Genomes[iter].Create_small_mutation(A[0], C[0], n);
+        cout << "Done!\n"
+             << "new RNA is:";
+        All_Genomes[iter].Print_RNA();
+        cout << "\nnew DNA is:";
+        All_Genomes[iter].Print_DNA();
+        break;
+    case 3:
+        cout << "First enter the substring to be changed"
+             << "Then enter the new substring ";
+        string s1 = correct_RNA_cin();
+        string s2 = correct_RNA_cin();
+        All_Genomes[iter].Create_big_mutation(s1, s2);
+        cout << "Done!\n"
+             << "new RNA is:";
+        All_Genomes[iter].Print_RNA();
+        cout << "\nnew DNA is:";
+        All_Genomes[iter].Print_DNA();
+        break;
+    case 4:
+        break;
+    default:
+        cout << "Not a Valid Choice. \n";
+        break;
+    }
+}
+
+// getting inputs and add a new genome to our genoms!
 void Create_new_Genome()
 {
     string RNA;
@@ -51,7 +118,8 @@ void Create_new_Genome()
     DNA1 = correct_RNA_cin();
     cout << "input second string of DNA...\n";
     DNA2 = correct_RNA_cin();
-    Genome my_obj(RNA, DNA1, DNA2);
+    Genome my_gen(RNA, DNA1, DNA2);
+    All_Genomes.push_back(my_gen);
 }
 
 int main()
@@ -77,7 +145,7 @@ int main()
             Create_new_Genome();
             break;
         case 2:
-            
+
             break;
         case 3:
             cout << "Ahahah, you really think I will help you?\n";

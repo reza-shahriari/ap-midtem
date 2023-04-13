@@ -55,11 +55,13 @@ public:
         DNA[0] = DNA1;
         DNA[1] = DNA2;
     }
-    void Print_RNA() const { cout << "RNA is:\n"
-                                  << RNA << endl; }
-    void Print_DNA() const { cout << "DNA is:\n"
-                                  << DNA[0] << endl
-                                  << DNA[1] << endl; }
+    void Print_RNA() const
+    {
+        cout << RNA << endl;
+    }
+    void Print_DNA() const { cout
+                             << DNA[0] << endl
+                             << DNA[1] << endl; }
     // return RNA
     string Get_RNA() const { return RNA; }
     // return DNA both in a single string

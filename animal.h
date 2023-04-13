@@ -172,6 +172,3 @@ public:
     }
 };
 
-int main()
-{
-}
