@@ -25,7 +25,7 @@ public:
                     return true;
             }
         }
-        if(A_T>(G_C*3))
+        if (A_T > (G_C * 3))
             return true;
         return false;
     }
@@ -35,6 +35,22 @@ public:
         {
             string DNA0 = cromozom_vector[i].DNA[0];
             string DNA1 = cromozom_vector[i].DNA[1];
+            if (check_for_kill(DNA0, DNA1))
+                delete this;
+        }
+    }
+    void Create_big_mutation(string s1, int n, string s2, int m)
+    {
+        int iter1 = cromozom_vector[n].DNA[0].find(s1);
+        string temp1 = cromozom_vector[n].DNA[1];
+        int iter2 = cromozom_vector[m].DNA[0].find(s2);
+        string temp2 = cromozom_vector[m].DNA[1];
+        for (int i = 0; i < s1.size(); i++)
+        {
+            cromozom_vector[n].DNA[0][i + iter1] = s2[i];
+            cromozom_vector[n].DNA[1][i + iter1] = temp2[i];
+            cromozom_vector[m].DNA[0][i + iter2] = s1[i];
+            cromozom_vector[m].DNA[1][i + iter2] = temp1[i];
         }
     }
 };

@@ -9,7 +9,7 @@ public:
     string RNA;
     string DNA[2];
     // clculate completed of each NOCLOTID
-    char Genome_Calculate_completed(char a)
+    char Calculate_completed(char a)
     {
         if (a == 'A')
             return 'T';
@@ -22,16 +22,16 @@ public:
     }
     //Calculate Completed for every single Noclotid in RNA
     // and then return it as a string
-    string Genome_create_second_DNA_from_RNA(string input_RNA){
+    string create_second_DNA_from_RNA(string input_RNA){
         string make_DNA=input_RNA;
         for (int i = 0; i < input_RNA.length(); i++)
         {
-            make_DNA[i] = Genome_Calculate_completed(input_RNA[i]);
+            make_DNA[i] = Calculate_completed(input_RNA[i]);
         }
         return make_DNA;
     }
     //getting a string and returning reverse order of it
-    string Genome_Create_reverse(string s1){
+    string Create_reverse(string s1){
         string s2 = s1;
         int n = s1.length();
         for (int i =0 ; i < n ; i++){
@@ -46,29 +46,31 @@ public:
         DNA[0] = DNA1;
         DNA[1] = DNA2;
     }
-    void Genome_Print_RNA()const {cout<<"RNA is:\n"<<RNA<<endl;}
-    void Genome_Print_DNA()const {cout<<"DNA is:\n"<<DNA[0]<<endl<<DNA[1]<<endl;}
+    void Print_RNA()const {cout<<"RNA is:\n"<<RNA<<endl;}
+    void Print_DNA()const {cout<<"DNA is:\n"<<DNA[0]<<endl<<DNA[1]<<endl;}
     // return RNA
-    string Genome_Get_RNA() const { return RNA; }
+    string Get_RNA() const { return RNA; }
     // return DNA both in a single string
-    string Genome_Get_DNA() const
+    string Get_DNA() const
     {
         // we will split it to tow strings when we want to use
         return DNA[0] + DNA[1];
     }
     // creating DNA form RNA
-    void Genome_Create_DNA()
+    // 
+    void Create_DNA()
     {
         cout<<"creating DNA from RNA\n";
         string DNA_maker[2];
         DNA_maker[0] = RNA;
-        DNA_maker[1] = Genome_create_second_DNA_from_RNA(RNA);
+        DNA_maker[1] = create_second_DNA_from_RNA(RNA);
         cout << "created DNA is:\n"
              << DNA_maker[0] << endl
              << DNA_maker[1] << endl;
     }
-    // creatign small mutation in RNA and DNA
-    void Genome_Create_small_mutation(char A, char C, int n)
+    // creatign small mutation in RNA and DNA 
+    //changing  char A with Char C n times
+    void Create_small_mutation(char A, char C, int n)
     {
         cout<<"creating small mutation\n";
         int check = n;
@@ -89,14 +91,14 @@ public:
             {
                 check--;
                 DNA[0][i] = C;
-                DNA[1][i] = Genome_Calculate_completed(C);
+                DNA[1][i] = Calculate_completed(C);
                 if (check == 0)
                     break;
             }
         }
     }
     //creating big mutaion in RNA and DNA
-    void Genome_Create_big_mutation(string s1, string s2)
+    void Create_big_mutation(string s1, string s2)
     {
         cout<<"creating big mutation\n";
         int i = RNA.find(s1);
@@ -113,7 +115,7 @@ public:
                  << "Please try again\n";   
 
     }
-    void Genome_create_reverse_mutation(string s1){
+    void create_reverse_mutation(string s1){
         cout<<"creating reverse mutation\n";
         int i = RNA.find(s1);
         if (i == -1)
@@ -122,11 +124,11 @@ public:
                  << "Please try again" << endl;
         }
         else{
-            string s2 = Genome_Create_reverse(s1);
+            string s2 = Create_reverse(s1);
             for (int j = i; j < s2.length() + i; j++)
                 RNA[j] = s2[j-i];
     }
         DNA[0] = RNA;
-        DNA[1] = Genome_create_second_DNA_from_RNA(DNA[0]);
+        DNA[1] = create_second_DNA_from_RNA(DNA[0]);
     }
 };
