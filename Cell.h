@@ -3,6 +3,8 @@
 #include <random>
 #include <vector>
 #include "Genome.h"
+
+
 using namespace std;
 
 class Cell : public Genome
@@ -19,11 +21,11 @@ public:
     }
     string Create_random_cromozom(int n)
     {
-        string DNA1="";
+        string DNA1 = "";
         char A[] = {'A', 'T', 'C', 'G'};
         for (int i = 0; i < n; i++)
         {
-            int random = rand()%4;
+            int random = rand() % 4;
             DNA1 += A[random];
         }
         return DNA1;

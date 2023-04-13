@@ -69,9 +69,12 @@ void Work_with_genome()
     switch (c)
     {
     case 1:
+    {
         All_Genomes[iter].Print_DNA();
         break;
+    }
     case 2:
+    {
         cout << "Which two things do you want to exchange?"
              << "(First, what is now in RNA\n"
              << "Second, what is to be replaced)";
@@ -87,7 +90,9 @@ void Work_with_genome()
         cout << "\nnew DNA is:";
         All_Genomes[iter].Print_DNA();
         break;
+    }
     case 3:
+    {
         cout << "First enter the substring to be changed"
              << "Then enter the new substring ";
         string s1 = correct_RNA_cin();
@@ -99,11 +104,41 @@ void Work_with_genome()
         cout << "\nnew DNA is:";
         All_Genomes[iter].Print_DNA();
         break;
+    }
     case 4:
+    {
+        cout << "enter substring you want to reverse\n";
+        string s1 = correct_RNA_cin();
+        All_Genomes[iter].create_reverse_mutation(s1);
+        cout << "Done!\n"
+             << "new RNA is:";
+        All_Genomes[iter].Print_RNA();
+        cout << "\nnew DNA is:";
+        All_Genomes[iter].Print_DNA();
         break;
+    }
+    case 5:
+    {
+        cout << "Enter the RNA you want crete DNA from:\n";
+        string s1 = correct_RNA_cin();
+        All_Genomes[iter].Create_DNA(s1);
+        cout << "Done!\n"
+             << "new RNA is:";
+        All_Genomes[iter].Print_RNA();
+        cout << "\nnew DNA is:";
+        All_Genomes[iter].Print_DNA();
+        break;
+    }
+    case 6:
+    {
+        cout << "returning to main menu..." << endl;
+        break;
+    }
     default:
+    {
         cout << "Not a Valid Choice. \n";
         break;
+    }
     }
 }
 

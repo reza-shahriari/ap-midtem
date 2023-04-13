@@ -72,12 +72,12 @@ public:
     }
     // creating DNA form RNA
     //
-    void Create_DNA()
+    void Create_DNA(string input_RNA)
     {
         cout << "creating DNA from RNA\n";
         string DNA_maker[2];
-        DNA_maker[0] = RNA;
-        DNA_maker[1] = create_second_DNA_from_first_DNA(RNA);
+        DNA_maker[0] = input_RNA;
+        DNA_maker[1] = create_second_DNA_from_first_DNA(input_RNA);
         cout << "created DNA is:\n"
              << DNA_maker[0] << endl
              << DNA_maker[1] << endl;
