@@ -113,7 +113,7 @@ public:
                  << "Please try again\n";   
 
     }
-    void create_reverse_mutation(string s1){
+    void Create_reverse_mutation(string s1){
         cout<<"creating reverse mutation\n";
         int i = RNA.find(s1);
         if (i == -1)

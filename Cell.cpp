@@ -8,6 +8,8 @@ class Cell : Genome
 {
 public:
     vector<Genome> cromozom_vector;
+    // check if this cell should be deleted
+    // if A,T 3 times more than G,C or more than 5 misstakes in DNA
     bool check_for_kill(string a, string b)
     {
         int n = 0;
@@ -29,6 +31,7 @@ public:
             return true;
         return false;
     }
+    // delete coromozom if it should be removed
     void killing_cell()
     {
         for (int i = 0; i < cromozom_vector.size(); i++)
@@ -39,6 +42,8 @@ public:
                 delete this;
         }
     }
+    // change first s2 in coromozom m with s1 in coromozom n
+    //  and doing it for second DNA
     void Create_big_mutation(string s1, int n, string s2, int m)
     {
         int iter1 = cromozom_vector[n].DNA[0].find(s1);
@@ -53,6 +58,7 @@ public:
             cromozom_vector[m].DNA[1][i + iter2] = temp1[i];
         }
     }
+    // change A in mth coromozom with C n times
     void Create_small_mutation(char A, char C, int n, int m)
     {
         int f = n;
@@ -68,7 +74,16 @@ public:
                 break;
         }
     }
-    
+    // complete the s1 in nth coromozom
+    void Create_reverse_mutation(string s1, int n)
+    {
+        int iter = cromozom_vector[n].DNA[0].find(s1);
+        for (int i = iter; i < cromozom_vector[n].DNA[0].length(); i++)
+        {
+            cromozom_vector[n].DNA[0][i] = Calculate_completed(cromozom_vector[n].DNA[0][i]);
+            cromozom_vector[n].DNA[1][i] = Calculate_completed(cromozom_vector[n].DNA[1][i]);
+        }
+    }
 };
 
 int main()
