@@ -48,15 +48,17 @@ public:
         }
         return 1.0;
     }
-    double Similarity_cells(int n, int m)
+    double Similarity_cells(Animal a)
     {
-        int min_size = min(cells_vector[n].cromozom_vector.size(), cells_vector[m].cromozom_vector.size());
-        int max_size = max(cells_vector[n].cromozom_vector.size(), cells_vector[m].cromozom_vector.size());
+        int n = a.cells_vector.size();
+        int m = this->cells_vector.size();
+        int min_size = min(n, m);
+        int max_size = max(n, m);
         vector<double> result_maker;
         for (int i = 0; i < min_size; i++)
         {
-            double p1 = Find_string_similarity_percent(cells_vector[n].cromozom_vector[i].DNA[0], cells_vector[m].cromozom_vector[i].DNA[0]);
-            double p2 = Find_string_similarity_percent(cells_vector[n].cromozom_vector[i].DNA[1], cells_vector[m].cromozom_vector[i].DNA[1]);
+            double p1 = Find_string_similarity_percent(a.cromozom_vector[i].DNA[0], this->cromozom_vector[i].DNA[0]);
+            double p2 = Find_string_similarity_percent(a.cromozom_vector[i].DNA[1], this->cromozom_vector[i].DNA[1]);
             result_maker.push_back(p1);
             result_maker.push_back(p2);
         }
@@ -72,6 +74,14 @@ public:
             cal += result_maker[i];
         }
         return (cal / N);
+    }
+    bool operator==(const Animal a)
+    {
+        if (cells_vector.size() != a.cells_vector.size())
+            return false;
+        if (Similarity_cells(a) < 0.70)
+            return false;
+        return true;
     }
 };
 
