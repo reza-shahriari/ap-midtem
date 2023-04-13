@@ -84,6 +84,19 @@ public:
             cromozom_vector[n].DNA[1][i] = Calculate_completed(cromozom_vector[n].DNA[1][i]);
         }
     }
+    // find all complete palindrome in a coromozom
+    void find_all_complete_palindrome(int m)
+    {
+        string str;
+        int n = cromozom_vector[m].DNA[0].size();
+        for (int i = 1; i < n; i++)
+        {
+            for (int j = 0; j < n; j++)
+            {
+
+            }
+        }
+    }
 };
 
 int main()
