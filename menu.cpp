@@ -49,7 +49,19 @@ int correct_number_cin(int a, int b)
     }
 }
 
-//
+//Create a new cell and adding it to the vector
+void Create_new_cell()
+{
+    cout << "Enter first cromozom's DNA\n"
+         << "first enter first string of DNA\n"
+         << "then enter second string of DNA\n";
+    string s1 = correct_RNA_cin();
+    string s2 = correct_RNA_cin();
+    Cell new_cell(s1, s2);
+    All_Cells.push_back(new_cell);
+}
+
+// functions wirted in Genome are now accessible!
 void Work_with_genome()
 {
     cout << "Selcet one Genome\n";
@@ -143,7 +155,7 @@ void Work_with_genome()
 }
 
 // getting inputs and add a new genome to our genoms!
-void Create_new_Genome()
+void Create_new_genome()
 {
     string RNA;
     string DNA1, DNA2;
@@ -177,10 +189,10 @@ int main()
         switch (choice)
         {
         case 1:
-            Create_new_Genome();
+            Create_new_genome();
             break;
         case 2:
-
+            Work_with_genome();
             break;
         case 3:
             cout << "Ahahah, you really think I will help you?\n";
